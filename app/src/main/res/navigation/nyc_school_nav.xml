@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nyc_school_nav"
+    app:startDestination="@id/NYCSchoolFragment">
+
+    <fragment
+        android:id="@+id/NYCSchoolFragment"
+        android:name="com.example.nycschool.fragment.NYCSchoolFragment"
+        android:label="fragment_n_y_c_school"
+        tools:layout="@layout/fragment_n_y_c_school" >
+        <action
+            android:id="@+id/action_NYCSchoolFragment_to_NYCSchoolDetail"
+            app:destination="@id/NYCSchoolDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/NYCSchoolDetail"
+        android:name="com.example.nycschool.fragment.NYCSchoolDetail"
+        android:label="fragment_n_y_c_school_detail"
+        tools:layout="@layout/fragment_n_y_c_school_detail" />
+</navigation>
