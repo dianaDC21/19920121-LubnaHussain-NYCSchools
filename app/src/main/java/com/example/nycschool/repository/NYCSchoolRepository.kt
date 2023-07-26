@@ -1,37 +1,45 @@
 package com.example.nycschool.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.nycschool.api.NYCSchoolApi
 import com.example.nycschool.model.NYCSchoolResponseItem
 import com.example.nycschool.model.SatScoreResponseItem
+import com.example.nycschool.utils.ApiResult
+import com.example.nycschool.utils.ApiStatus
 
-class NYCSchoolRepository(private val nycSchoolApi: NYCSchoolApi){ //add api instance in const. and call getter
-    private val schoolLiveData = MutableLiveData<List<NYCSchoolResponseItem>>()
-    val schoolData: LiveData<List<NYCSchoolResponseItem>>
-    get() = schoolLiveData
+/**
+ * This repository class is used to call the school API endpoints
+ */
+class NYCSchoolRepository(private val nycSchoolApi: NYCSchoolApi) {
 
-    /*private val satScoreLiveData = MutableLiveData<List<SatScoreResponseItem>>()
-    val satScoreData: LiveData<List<SatScoreResponseItem>>
-        get() = satScoreLiveData*/
-
-    suspend fun getNYCSchools() {
-        val response = nycSchoolApi.getNYCSchool()
-        if (response.body() != null) {
-            schoolLiveData.postValue(response.body())
+    /**
+     * Repository method to call GET NYC school api, response status is captured
+     */
+    suspend fun getNYCSchools(): ApiResult<List<NYCSchoolResponseItem>> {
+        return try {
+            val response = nycSchoolApi.getNYCSchool()
+            if (response.isSuccessful && response.body() != null) {
+                ApiResult(ApiStatus.SUCCESS, response.body())
+            } else {
+                ApiResult(ApiStatus.FAILURE)
+            }
+        } catch (e: Exception) {
+            ApiResult(ApiStatus.EXCEPTION)
         }
     }
 
-    suspend fun getSATScore(dbn: String) : List<SatScoreResponseItem> {
-        val response = nycSchoolApi.getSATScore(dbn)
-        Log.d("lubna", "repo getSATScore $dbn")
-        return if (response.body() != null && response.isSuccessful) {
-            Log.d("lubna", "repo sat score ${response.body()!![0].school_name}," +
-                    response.body()!![0].sat_math_avg_score
-            )
-            response.body()!!
-
-        } else emptyList()
+    /**
+     * Repository method to call GET sat score api, response status is captured
+     */
+    suspend fun getSATScore(dbn: String): ApiResult<List<SatScoreResponseItem>> {
+        return try {
+            val response = nycSchoolApi.getSATScore(dbn)
+            if (response.isSuccessful && response.body() != null) {
+                ApiResult(ApiStatus.SUCCESS, response.body())
+            } else {
+                ApiResult(ApiStatus.FAILURE)
+            }
+        } catch (e: Exception) {
+            ApiResult(ApiStatus.EXCEPTION)
+        }
     }
 }

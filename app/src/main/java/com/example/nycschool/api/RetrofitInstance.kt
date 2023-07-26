@@ -7,9 +7,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+/**
+ * This class creates retrofit instance and creates the retrofit client
+ */
 class RetrofitInstance {
-    //create Retrofit singleton class
     companion object {
 
         private val retrofit by lazy {

@@ -5,28 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#006a4e"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/newsNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/myFragment"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nyc_school_nav">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/newsNavHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nyc_school_nav">
-
-        </androidx.fragment.app.FragmentContainerView>
-
-    </FrameLayout>
-
+    </androidx.fragment.app.FragmentContainerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

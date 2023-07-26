@@ -1,4 +1,5 @@
 package com.example.nycschool.viewmodel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,32 +7,42 @@ import androidx.lifecycle.viewModelScope
 import com.example.nycschool.model.NYCSchoolResponseItem
 import com.example.nycschool.model.SatScoreResponseItem
 import com.example.nycschool.repository.NYCSchoolRepository
+import com.example.nycschool.utils.ApiResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * This view model class is used to call the repository methods, live data is observed in the fragments
+ */
 class NYCSchoolViewModel(
     private val nycSchoolRepository: NYCSchoolRepository
-): ViewModel() {
+) : ViewModel() {
+    private val schoolLiveData = MutableLiveData<ApiResult<List<NYCSchoolResponseItem>>>()
+    val schoolData: LiveData<ApiResult<List<NYCSchoolResponseItem>>>
+        get() = schoolLiveData
 
-    val schoolData: LiveData<List<NYCSchoolResponseItem>>
-    get() = nycSchoolRepository.schoolData
+    private val satLiveData = MutableLiveData<ApiResult<List<SatScoreResponseItem>>>()
+    val satScoreData: LiveData<ApiResult<List<SatScoreResponseItem>>>
+        get() = satLiveData
 
-    private val satLiveData = MutableLiveData<List<SatScoreResponseItem>>()
-    val satScoreData: LiveData<List<SatScoreResponseItem>>
-    get() = satLiveData
-
-    init {
+    /**
+     * View model method to call GET NYC school api via repository, result is posted via liveData
+     */
+    fun getNYCSchools() {
         viewModelScope.launch(Dispatchers.IO) {
-            nycSchoolRepository.getNYCSchools()
+            val response = nycSchoolRepository.getNYCSchools()
+            schoolLiveData.postValue(response)
         }
     }
 
-    fun getSATScore(dbn: String) : LiveData<List<SatScoreResponseItem>> {
-        val satScoreData = MutableLiveData<List<SatScoreResponseItem>>()
+    /**
+     * View model method to call GET sat score api, result is posted via liveData
+     */
+    fun getSATScore(dbn: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = nycSchoolRepository.getSATScore(dbn)
-            satScoreData.postValue(response)
+            satLiveData.postValue(response)
         }
-        return satScoreData
     }
+
 }

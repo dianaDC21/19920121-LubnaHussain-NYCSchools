@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">NYCSchool</string>
+    <string name="app_name">NYCSchools</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loading_schools">Loading Schools, please wait…</string>
+    <string name="search_menu">Search</string>
+    <string name="school_data">%1$s\n%2$s</string>
     <string name="readingScore">Reading Average Score: %1$s</string>
     <string name="mathScore">Math Average Score: %1$s</string>
     <string name="writingScore">Writing Average Score: %1$s</string>
+    <string name="school_detail_error_msg">This information could not be fetched</string>
+    <string name="empty_score">--</string>
+    <string name="direction">Address:</string>
+    <string name="contact_us">Contact Us:</string>
 </resources>
