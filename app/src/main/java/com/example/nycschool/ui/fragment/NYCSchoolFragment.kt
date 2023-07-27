@@ -68,7 +68,7 @@ class NYCSchoolFragment : Fragment(), SchoolAdapter.OnSchoolItemClickListener {
             handleResponse(response.status)
             if (response?.isSuccess() == true && !response.apiResponse.isNullOrEmpty()) {
                 responseList = response.apiResponse
-                schoolAdapter.setMovieList(responseList)
+                schoolAdapter.setSchoolList(responseList)
             }
         }
     }
@@ -136,7 +136,7 @@ class NYCSchoolFragment : Fragment(), SchoolAdapter.OnSchoolItemClickListener {
                         .contains(searchItem)
                 ) {
                     filteredList.add(responseList[i])
-                    schoolAdapter.setMovieList(filteredList)
+                    schoolAdapter.setSchoolList(filteredList)
                     search = true
                 }
             }

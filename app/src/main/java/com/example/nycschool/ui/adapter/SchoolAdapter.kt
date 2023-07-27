@@ -15,7 +15,7 @@ class SchoolAdapter(private val listener: OnSchoolItemClickListener) :
     RecyclerView.Adapter<SchoolAdapter.MyViewHolder>() {
     private var schoolData = mutableListOf<NYCSchoolResponseItem>()
 
-    fun setMovieList(schoolData: List<NYCSchoolResponseItem>) {
+    fun setSchoolList(schoolData: List<NYCSchoolResponseItem>) {
         this.schoolData = schoolData.toMutableList()
         notifyDataSetChanged()
     }
