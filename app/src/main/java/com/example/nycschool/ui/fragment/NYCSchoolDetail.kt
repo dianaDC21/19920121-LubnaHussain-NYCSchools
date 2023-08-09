@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.nycschool.ui.MainActivity
 import com.example.nycschool.R
 import com.example.nycschool.databinding.FragmentNYCSchoolDetailBinding
@@ -44,12 +46,24 @@ class NYCSchoolDetail : Fragment() {
             container,
             false
         )
+
         return binding.root
+    }
+
+    private fun showBackButton() {
+        /*binding.myToolbar.apply {
+            navigationIcon = resources.getDrawable(R.drawable.ic_baseline_arrow_back_24)
+            setNavigationOnClickListener {
+                activity?.onBackPressed()
+            }
+        }*/
+        //val a = AppBarConfiguration(findNavController().graph)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
+        showBackButton()
         val dbn = arguments?.getString(DB_REFERENCE)
 
         /**
