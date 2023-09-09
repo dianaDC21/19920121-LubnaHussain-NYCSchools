@@ -1,15 +1,13 @@
 package com.example.nycschool.ui
 
-import NYCSchoolViewModelFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
+import com.example.nycschool.NYCSchoolApplication
 import com.example.nycschool.R
-import com.example.nycschool.api.RetrofitInstance
-import com.example.nycschool.di.ApplicationComponent
-import com.example.nycschool.repository.NYCSchoolRepository
 import com.example.nycschool.viewmodel.NYCSchoolViewModel
+import com.example.nycschool.viewmodel.NYCSchoolViewModelFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -23,10 +21,14 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(R.layout.activity_main)
 
-        (application as ApplicationComponent).inject(this) //component check which fields in activity have Inject, will initialize them
+        //component check which fields in activity have Inject, will initialize them
+        (application as NYCSchoolApplication).applicationComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory)[NYCSchoolViewModel::class.java]
+
         /*val schoolRepository = NYCSchoolRepository(RetrofitInstance.api)
-        val viewModelProviderFactory = NYCSchoolViewModelFactory(schoolRepository)*/
+        val viewModelProviderFactory = NYCSchoolViewModelFactory(schoolRepository)
         viewModel =
-            ViewModelProvider(this, viewModelFactory)[NYCSchoolViewModel::class.java]
+            ViewModelProvider(this, viewModelProviderFactory)[NYCSchoolViewModel::class.java]*/
+
     }
 }

@@ -65,6 +65,27 @@ internal class NYCSchoolViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun test_getNYCSchools_isErrorStat() = runTest {
+        /*val nycSchoolList = mutableListOf<NYCSchoolResponseItem>()
+        nycSchoolList.add(NYCSchoolResponseItem("01M292", "ABC_SCHOOL","",
+            "", "", "", "","", ""))
+        nycSchoolList.add(NYCSchoolResponseItem("01M448", "XYZ_SCHOOL", "",
+            "", "", "", "", "", ""))*/
+
+        Mockito.`when`(repository.getNYCSchools()).thenReturn(ApiResult(ApiStatus.FAILURE))
+
+        vm?.getNYCSchools()
+        testDispatcher.scheduler.advanceUntilIdle()
+        vm?.schoolData?.observeForever {
+            Assert.assertNull(
+                it.apiResponse
+            )
+        }
+    }
+
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun test_getSATScore() = runTest {
         val satScore = SatScoreResponseItem("01M292",
             "200", "340",
