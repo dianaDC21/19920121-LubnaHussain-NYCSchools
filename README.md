@@ -1,4 +1,4 @@
-# 19920121-LubnaHussain-NYCSchools
+# 19920121-NYCSchools
 
 This App uses Android Jetpack libraries plus retrofit to display data from REST API, uses Kotlin
 
