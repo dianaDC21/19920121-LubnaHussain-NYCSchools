@@ -1,4 +1,4 @@
-package com.example.nycschool.di
+package com.example.nycschool.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

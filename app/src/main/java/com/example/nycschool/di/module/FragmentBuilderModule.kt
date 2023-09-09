@@ -1,4 +1,4 @@
-package com.example.nycschool.di
+package com.example.nycschool.di.module
 
 import com.example.nycschool.ui.fragment.NYCSchoolDetail
 import com.example.nycschool.ui.fragment.NYCSchoolFragment

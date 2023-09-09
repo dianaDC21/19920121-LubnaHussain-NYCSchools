@@ -1,8 +1,8 @@
 package com.example.nycschool
 
 import android.app.Application
-import com.example.nycschool.di.ApplicationComponent
-import com.example.nycschool.di.DaggerApplicationComponent
+import com.example.nycschool.di.component.ApplicationComponent
+import com.example.nycschool.di.component.DaggerApplicationComponent
 
 class NYCSchoolApplication: Application() {
     lateinit var applicationComponent: ApplicationComponent

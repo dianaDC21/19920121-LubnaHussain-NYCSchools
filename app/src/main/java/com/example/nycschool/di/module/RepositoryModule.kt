@@ -1,4 +1,4 @@
-package com.example.nycschool.di
+package com.example.nycschool.di.module
 
 import com.example.nycschool.api.NYCSchoolApi
 import com.example.nycschool.repository.NYCSchoolRepository
